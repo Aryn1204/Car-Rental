@@ -1,0 +1,21 @@
+
+services:
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: rental-backend-container
+    env_file:
+      - ./server/.env.production
+    expose:
+      - "3000"
+
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: rental-frontend-container
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
